@@ -8,18 +8,13 @@ router.get('/', async function(req, res, next) {
   const user_id = req.query.id;
   if(user_id){
     console.log('userId',user_id)
-    const test = await client.getEntityById('users',user_id)
+    const test = await client.getEntityById('collections',user_id)
     res.send(test);
   }else{
-    const test = await client.getCollectionByName('users')
+    const test = await client.getCollectionByName('collections')
     res.send(test);
   }
-});
-router.put('/', async function(req, res, next) {
-  const client = new DatabaseClient('test')
-  let user = req.body
-  const test = await client.updateFieldOfDocumentInCollection('users',user,'cleaningList')
-  res.send(test);
+
 });
 
 
