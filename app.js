@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var transactions = require('./routes/transactions');
 var testRouter = require('./routes/test');
 var collections = require('./routes/collections');
+var areas = require('./routes/areas');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/users', usersRouter);
 app.use('/test', testRouter);
 app.use('/collections', collections);
 app.use('/transactions', transactions);
+app.use('/areas', areas);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

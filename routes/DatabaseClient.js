@@ -32,6 +32,7 @@ module.exports= class DatabaseClient{
         await this.client.connect();
         return this.client.db(this.dbName).collection(name).insertOne(document)
     }
+
     async updateFieldOfDocumentInCollection(collectionName,document,field){
         await this.client.connect();
         let setObject = {}
@@ -39,6 +40,13 @@ module.exports= class DatabaseClient{
         console.log('setObject',setObject)
         return this.client.db(this.dbName).collection(collectionName).updateOne( { _id:ObjectId(document._id) },
             { $set: setObject },
+            { upsert: true })
+    }
+    async updateDocumentInCollection(collectionName,document){
+        await this.client.connect();
+        console.log('setObject',document)
+        return this.client.db(this.dbName).collection(collectionName).updateOne( { _id:ObjectId(document._id) },
+            { $set: document },
             { upsert: true })
     }
 }
