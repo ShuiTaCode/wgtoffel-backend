@@ -10,7 +10,7 @@ router.get('/all', async function(req, res, next) {
 });
 router.get('/', async function(req, res, next) {
   const client = new DatabaseClient('test')
-    const area = await client.getEntityById(req.body.id)
+    const area = await client.getEntityById('areas',req.body.id)
     res.send(area);
 });
 router.post('/create', async function(req, res, next) {
