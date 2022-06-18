@@ -33,6 +33,18 @@ router.put('/v2', async function(req, res, next) {
   res.send(test);
 });
 
+router.put('/v3', async function(req, res, next) {
+  const client = new DatabaseClient('test')
+  let area = req.body
+  for(let field in area){
+    if(field !== '_id'){
+      await client.updateFieldOfDocumentInCollection('areas',area,field)
+    }
+  }
+  res.send();
+});
+
+
 
 
 module.exports = router;

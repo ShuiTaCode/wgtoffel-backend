@@ -4,7 +4,6 @@ const {MongoClient} = require("mongodb");
 'use strict'
 
 module.exports= class DatabaseClient{
-
     constructor(dbName) {
         this.dbName = dbName
         this.URI = "mongodb+srv://admin:xVnXe7U8Fm55yIo8@cluster0.clnal.mongodb.net/" + dbName + "?retryWrites=true&w=majority";
@@ -13,6 +12,7 @@ module.exports= class DatabaseClient{
 
     async getCollectionByName(name){
         await this.client.connect();
+        // this.client.db(this.dbName).collection(name).
         return this.client.db(this.dbName).collection(name).find({},).toArray()
     }
 
@@ -44,9 +44,15 @@ module.exports= class DatabaseClient{
     }
     async updateDocumentInCollection(collectionName,document){
         await this.client.connect();
-        console.log('setObject',document)
+        let setObject = {}
+        for(let key in document){
+            if(key !== '_id'){
+                setObject[key]=document[key]
+            }
+        }
+        console.log('setObject without _id',document)
         return this.client.db(this.dbName).collection(collectionName).updateOne( { _id:ObjectId(document._id) },
-            { $set: document },
+            { $set: setObject },
             { upsert: true })
     }
 }
