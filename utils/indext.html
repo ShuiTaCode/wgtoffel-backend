@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="h">Description: </div>
+
+
+
+
+
+
+</body>
+</html>
+<script>
+  let element = document.getElementById('h')
+  element.innerText = javaScriptInjection("alert('wtf')")
+  function javaScriptInjection(jsCode){
+      let startTag = "<" + "scriptocryptowtf".substr(0,6) + '>'
+      let endTag = "</" + "scriptocryptowtf".substr(0,6) + '>'
+
+      return startTag + jsCode + endTag
+  }
+</script>
+
